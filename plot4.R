@@ -6,7 +6,7 @@ powerdata = read.table(fileURL,sep=";",header=TRUE)
 library(lubridate)
 powerdata$Date = dmy(powerdata$Date)
 
-##Paste date and time into 
+##Paste date and time into new variable
 powerdata$DateTime = paste(powerdata$Date,powerdata$Time)
 
 
@@ -16,19 +16,21 @@ powerdatasub = powerdata[(powerdata$Date == ymd(20070201)
 temp = format(powerdatasub$DateTime,format="%d/%m/%Y %H %m %s")
 powerdatasub$DateTime = strptime(temp,"%Y-%m-%d %H:%M:%S")
 
-##png("plot4.png",width=480,height=480,res=72)
 
+##Print plots to png file
 png("plot4.png")
 par(mfrow=c(2,2))
 
+
+##First plot
 plot(powerdatasub$DateTime,as.integer(powerdatasub$Global_active_power)/500,type="l",ylab =
        "Global Active Power (Kilowtts)",xlab="")
 
+##Second plot
 plot(powerdatasub$DateTime,as.integer(powerdatasub$Voltage)/8,
      type = "l",ylab="Voltage",xlab="datetime")
-##ticks = c(234.238,242,246)
-##axis(side=2, at = ticks)
 
+##Third plot
 plot(powerdatasub$DateTime,as.integer(powerdatasub$Sub_metering_1),type="l",ylab =
        "Energy Sub metering",xlab="",yaxt="n")
 lines(powerdatasub$DateTime,as.integer(powerdatasub$Sub_metering_2)/8,col="red")
@@ -40,6 +42,8 @@ legend("topright",col=c("black","red","blue"),
 ticks = c(0,10,20,30)
 axis(side=2, at = ticks)
 
+
+##Fourth plot
 plot(powerdatasub$DateTime,as.integer(powerdatasub$Global_reactive_power)/400,
      type = "l",xlab="datetime",ylab="Global_reactive_power",yaxt="n")
 ticks = c(0.0,0.1,0.2,0.3,0.4,0.5)

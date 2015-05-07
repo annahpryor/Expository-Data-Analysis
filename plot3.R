@@ -6,7 +6,7 @@ powerdata = read.table(fileURL,sep=";",header=TRUE)
 library(lubridate)
 powerdata$Date = dmy(powerdata$Date)
 
-##Paste date and time into 
+##Paste date and time into new variable
 powerdata$DateTime = paste(powerdata$Date,powerdata$Time)
 
 
@@ -17,6 +17,7 @@ temp = format(powerdatasub$DateTime,format="%d/%m/%Y %H %m %s")
 powerdatasub$DateTime = strptime(temp,"%Y-%m-%d %H:%M:%S")
 
 
+##Print out plot to png file
 png("plot3.png",width=480,height=480,res=72)
 plot(powerdatasub$DateTime,as.integer(powerdatasub$Sub_metering_1),type="l",ylab =
        "Energy Sub metering",xlab="",yaxt="n")

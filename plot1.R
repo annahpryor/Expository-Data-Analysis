@@ -14,9 +14,6 @@ powerdatasub = powerdata[(powerdata$Date == ymd(20070201)
 ##Remove original data from memory
 ##rm(powerdata)
 
-##Convert the time
-powerdatasub$Time = hms(powerdatasub$Time)
-
 ##Plot the histogram
 
 png("plot1.png",width=480,height=480,res=72)

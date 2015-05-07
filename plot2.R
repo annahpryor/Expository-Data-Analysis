@@ -20,7 +20,7 @@ powerdatasub$DateTime = strptime(temp,"%Y-%m-%d %H:%M:%S")
 ##Remove original data from memory
 ##rm(powerdata)
 
-
+##Print plot to png file
 png("plot2.png",width=480,height=480,res=72)
 plot(powerdatasub$DateTime,as.integer(powerdatasub$Global_active_power)/500,type="l",ylab =
        "Global Active Power (Kilowtts)",xlab="")
